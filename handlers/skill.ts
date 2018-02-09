@@ -128,7 +128,16 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
               },
             },
           }];
-        }
+        } break;
+
+        case 'AMAZON.StopIntent': {
+          response.response.shouldEndSession = true;
+          response.response.outputSpeech.ssml! = '<speak>バイバイ</speak>';
+
+          response.response.directives = [{
+            type: 'AudioPlayer.Stop',
+          }];
+        } break;
       }
     } break;
   }

@@ -123,8 +123,8 @@ export interface AlexaSkillResponse {
 
     directives?: {
       type: string;
-      playBehavior: string;
-      audioItem: {
+      playBehavior?: string;
+      audioItem?: {
         stream: {
           token: string;
           url: string;
