@@ -50,7 +50,7 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
 
           response.response.directives = [{
             type:         'AudioPlayer.Play',
-            playBehavior: 'REPLACE_ENQUEUED',
+            playBehavior: 'REPLACE_ALL',
 
             audioItem: {
               stream: {
@@ -70,7 +70,7 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
 
           response.response.directives = [{
             type:         'AudioPlayer.Play',
-            playBehavior: 'REPLACE_ENQUEUED',
+            playBehavior: 'REPLACE_ALL',
 
             audioItem: {
               stream: {
@@ -118,7 +118,7 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
 
           response.response.directives = [{
             type:         'AudioPlayer.Play',
-            playBehavior: 'REPLACE_ENQUEUED',
+            playBehavior: 'REPLACE_ALL',
 
             audioItem: {
               stream: {
