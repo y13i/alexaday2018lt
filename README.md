@@ -8,6 +8,12 @@ demo.
 {
   "intents": [
     {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
       "intent": "AMAZON.PauseIntent"
     },
     {
