@@ -1,4 +1,9 @@
-export const languageCodeMap: Record<string, string> = {
+export function getSpeechText(languageCode: string): string | undefined {
+  const language: string | undefined = languageCodeMap[languageCode];
+  return language ? speecheTexts[language] : undefined;
+}
+
+const languageCodeMap: Record<string, string> = {
   'cy-GB':     'Welsh',
   'da-DK':     'Danish',
   'de-DE':     'German',
@@ -26,7 +31,7 @@ export const languageCodeMap: Record<string, string> = {
   'tr-TR':     'Turkish',
 };
 
-export const exampleSpeeches: Record<string, string> = {
+const speecheTexts: Record<string, string> = {
   'Welsh':      'Helo, dwi\'n $NAME. Rwy\'n siarad Cymraeg.',
   'Danish':     'Hej, jeg er $NAME. Jeg taler dansk.',
   'German':     'Hallo, ich bin $NAME. Ich spreche Dänisch.',

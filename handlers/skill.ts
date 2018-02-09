@@ -4,7 +4,7 @@ import {Polly, S3} from 'aws-sdk';
 
 import {AlexaSkillRequest, AlexaSkillResponse} from '../lib/types';
 import {uirouIntro, uirou} from '../lib/uirou';
-import {exampleSpeeches, languageCodeMap} from '../lib/languages';
+import {getSpeechText} from '../lib/languages';
 
 const bucket = process.env['BUCKET']!;
 const region = process.env['AWS_REGION']!;
@@ -91,26 +91,26 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
           const audioStreams = await Promise.all(describeVoicesOutput.Voices!.map(async (voice, index) => {
             await sleep(100 * index);
 
-            const text = exampleSpeeches[languageCodeMap[voice.LanguageCode!]]!.replace('$NAME', voice.Name!);
+            const speechText = getSpeechText(voice.LanguageCode!);
+
+            if (!speechText) return;
 
             const synthesizeSpeechOutput = await polly.synthesizeSpeech({
               OutputFormat: 'mp3',
               TextType:     'ssml',
-              Text:         `<speak><prosody volume="+2.1dB">${text}</prosody><break time="100ms"/></speak>`,
+              Text:         `<speak><prosody volume="+2.1dB">${speechText.replace('$NAME', voice.Name!)}</prosody><break time="100ms"/></speak>`,
               VoiceId:      voice.Id!,
             }).promise();
 
             return synthesizeSpeechOutput.AudioStream!;
           }));
 
-          const merged = Buffer.concat(audioStreams as Buffer[]);
-
           const objectName = `${Date.now()}.pollyFamily.mp3`;
 
           await s3.putObject({
             Bucket:      bucket,
             Key:         objectName,
-            Body:        merged,
+            Body:        Buffer.concat(audioStreams.filter(a => a) as Buffer[]),
             ContentType: 'audio/mp3',
           }).promise();
 
