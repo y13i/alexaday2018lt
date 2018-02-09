@@ -96,7 +96,7 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
             const synthesizeSpeechOutput = await polly.synthesizeSpeech({
               OutputFormat: 'mp3',
               TextType:     'ssml',
-              Text:         `<speak>${text}<break time="100ms"/></speak>`,
+              Text:         `<speak><prosody volume="+2.1dB">${text}</prosody><break time="100ms"/></speak>`,
               VoiceId:      voice.Id!,
             }).promise();
 
