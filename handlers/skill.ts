@@ -84,7 +84,7 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
 
         case 'CallEveryone': {
           response.response.shouldEndSession = true;
-          response.response.outputSpeech.ssml! = `<speak><prosody volume="x-loud" pitch="high">ポリー！　全員集合！</prosody></speak>`;
+          response.response.outputSpeech.ssml! = `<speak><prosody volume="x-loud" pitch="high">ポリー！　全員</prosody><prosody volume="x-loud" pitch="x-high">集合！</prosody></speak>`;
 
           const describeVoicesOutput = await polly.describeVoices().promise();
 
@@ -132,7 +132,7 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
 
         case 'AMAZON.StopIntent': {
           response.response.shouldEndSession = true;
-          response.response.outputSpeech.ssml! = '<speak>バイバイ</speak>';
+          response.response.outputSpeech.ssml! = '<speak>はい</speak>';
 
           response.response.directives = [{
             type: 'AudioPlayer.Stop',
