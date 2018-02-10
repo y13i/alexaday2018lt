@@ -84,7 +84,7 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
 
         case 'CallEveryone': {
           response.response.shouldEndSession = true;
-          response.response.outputSpeech.ssml! = `<speak><prosody volume="x-loud" pitch="high">ポリー！　全員</prosody><prosody volume="x-loud" pitch="x-high">集合！</prosody></speak>`;
+          response.response.outputSpeech.ssml! = `<speak><prosody volume="x-loud" pitch="high">ポリー！　全員</prosody><prosody volume="x-loud" pitch="x-high">集合！</prosody><break time="400ms"/></speak>`;
 
           const describeVoicesOutput = await polly.describeVoices().promise();
 
@@ -98,7 +98,7 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
             const synthesizeSpeechOutput = await polly.synthesizeSpeech({
               OutputFormat: 'mp3',
               TextType:     'ssml',
-              Text:         `<speak><prosody volume="+2.1dB">${speechText.replace('$NAME', voice.Name!)}</prosody><break time="100ms"/></speak>`,
+              Text:         `<speak><prosody volume="+2.1dB">${speechText.replace('$NAME', voice.Name!)}</prosody><break time="200ms"/></speak>`,
               VoiceId:      voice.Id!,
             }).promise();
 
