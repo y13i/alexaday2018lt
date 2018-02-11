@@ -44,7 +44,7 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
 
         case 'CallMizuki': {
           response.response.shouldEndSession = true;
-          response.response.outputSpeech.ssml! = '<speak>ミズキさん、お願いします</speak>';
+          response.response.outputSpeech.ssml! = '<speak>ミズキさん、お願いします<break time="600ms"/></speak>';
 
           const uploadedUrl = await uploadSpeach(polly, s3, `<speak><prosody volume="+2.1dB">${uirouIntro}</prosody></speak>`, 'Mizuki');
 
@@ -64,7 +64,7 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
 
         case 'CallTakumi': {
           response.response.shouldEndSession = true;
-          response.response.outputSpeech.ssml! = '<speak>タクミさん、お願いします</speak>';
+          response.response.outputSpeech.ssml! = '<speak>タクミさん、お願いします<break time="600ms"/></speak>';
 
           const uploadedUrl = await uploadSpeach(polly, s3, `<speak><prosody volume="+2.1dB">${uirouIntro}</prosody></speak>`, 'Takumi');
 
@@ -84,7 +84,7 @@ export default dalamb<AlexaSkillRequest, AlexaSkillResponse>(async event => {
 
         case 'CallEveryone': {
           response.response.shouldEndSession = true;
-          response.response.outputSpeech.ssml! = `<speak><prosody volume="x-loud" pitch="high">ポリー！　全員</prosody><prosody volume="x-loud" pitch="x-high">集合！</prosody><break time="400ms"/></speak>`;
+          response.response.outputSpeech.ssml! = `<speak><prosody volume="x-loud" pitch="high">ポリー！　全員</prosody><prosody volume="x-loud" pitch="x-high">集合！</prosody><break time="600ms"/></speak>`;
 
           const describeVoicesOutput = await polly.describeVoices().promise();
 
